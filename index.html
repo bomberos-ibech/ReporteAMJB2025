@@ -206,44 +206,50 @@
             margin: 0 auto 30px;
             width: fit-content;
             position: relative;
+            overflow: visible;
         }
         
         .qr-container::before {
             content: '';
             position: absolute;
-            inset: -5px;
-            background: linear-gradient(45deg, var(--primary), var(--secondary), var(--accent));
+            inset: -10px;
+            background: 
+                radial-gradient(ellipse at 20% 100%, rgba(255, 140, 0, 0.4) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 100%, rgba(255, 69, 0, 0.4) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 100%, rgba(255, 200, 0, 0.3) 0%, transparent 40%),
+                radial-gradient(ellipse at 40% 100%, rgba(255, 100, 0, 0.35) 0%, transparent 45%);
             border-radius: 20px;
-            z-index: -1;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .qr-container:hover::before {
-            opacity: 1;
+            z-index: 1;
+            pointer-events: none;
+            animation: qrFlames 2.5s ease-in-out infinite;
         }
         
         .qr-container::after {
             content: '';
             position: absolute;
-            inset: 10px;
+            inset: -10px;
             background: 
-                radial-gradient(ellipse at 30% 70%, rgba(255, 140, 0, 0.15) 0%, transparent 60%),
-                radial-gradient(ellipse at 70% 60%, rgba(255, 69, 0, 0.15) 0%, transparent 60%),
-                radial-gradient(ellipse at 50% 80%, rgba(255, 200, 0, 0.1) 0%, transparent 50%);
-            border-radius: 15px;
+                radial-gradient(ellipse at 30% 100%, rgba(255, 150, 0, 0.35) 0%, transparent 45%),
+                radial-gradient(ellipse at 70% 100%, rgba(255, 120, 0, 0.3) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 100%, rgba(255, 220, 0, 0.25) 0%, transparent 35%);
+            border-radius: 20px;
+            z-index: 1;
             pointer-events: none;
-            animation: qrFlames 2s ease-in-out infinite;
+            animation: qrFlames 2.5s ease-in-out infinite reverse;
         }
         
         @keyframes qrFlames {
             0%, 100% {
-                transform: translateY(0) scale(1);
-                opacity: 0.6;
+                transform: translateY(0) scaleY(1);
+                opacity: 0.7;
             }
-            50% {
-                transform: translateY(-10px) scale(1.05);
-                opacity: 0.9;
+            33% {
+                transform: translateY(-8px) scaleY(1.1);
+                opacity: 1;
+            }
+            66% {
+                transform: translateY(-4px) scaleY(0.95);
+                opacity: 0.8;
             }
         }
         
@@ -252,6 +258,8 @@
             height: 250px;
             border-radius: 15px;
             display: block;
+            position: relative;
+            z-index: 2;
         }
         
         .download-info {
@@ -462,14 +470,8 @@
         
         <div class="info-grid">
             <div class="info-card">
-                <h3>Objetivo</h3>
-                <p>Los eventos Nacionales e Internacionales tiene como objetivo
-
-Reunir a servicios de incendios y rescate de todo el mundo para abordar y debatir los numerosos riesgos, desafíos y oportunidades comunes a los que se enfrentan estos servicios: desde nuevos y cambiantes riesgos y la salud, seguridad y bienestar de nuestros equipos de trabajo hasta el papel del servicio de incendios y rescate y las oportunidades que ofrecen la innovación, la inteligencia artificial y las nuevas tecnologías, todo con el objetivo de compartir conocimientos y buenas prácticas.
-
-La participación en estos eventos busca ampliar y profundizar la colaboración internacional entre los servicios de incendios y rescate con el objetivo de aportar los beneficios de una comprensión y experiencia compartidas para abordar los crecientes desafíos globales a los que se enfrentan estos servicios
-
-https://drive.google.com/file/d/ 177IDkLltdQeXrJMTjWQGFWGsf3m9cC8u /view?usp=sharing</p>
+                <h3>⏰ Disponibilidad</h3>
+                <p>Servicio de emergencias disponible las 24 horas del día, los 365 días del año. Siempre listos para actuar.</p>
             </div>
         </div>
     </main>
@@ -500,16 +502,19 @@ https://drive.google.com/file/d/ 177IDkLltdQeXrJMTjWQGFWGsf3m9cC8u /view?usp=sha
     <script>
         // CONFIGURACIÓN - Cambia estos IDs por los de tus archivos en Google Drive
         const config = {
-            // Para obtener el ID de un archivo de Google Drive:
-            // 1. Haz clic derecho en el archivo > Obtener enlace
-            // 2. Cambia "restringido" a "cualquier persona con el enlace"
-            // 3. Copia el ID que aparece en la URL entre /d/ y /view
-            // Ejemplo: https://drive.google.com/file/d/ABC123XYZ456/view
-            // El ID sería: ABC123XYZ456
+            // IMPORTANTE: Para que las imágenes funcionen en Google Drive:
+            // 1. Sube tu imagen a Google Drive
+            // 2. Haz clic derecho > Compartir
+            // 3. Cambia a "Cualquiera con el enlace puede VER"
+            // 4. La URL será algo como: https://drive.google.com/file/d/ABC123XYZ/view?usp=sharing
+            // 5. Copia solo la parte ABC123XYZ (el ID entre /d/ y /view)
+            // 6. Pégalo abajo reemplazando TU_ID_DEL_LOGO_AQUI o TU_ID_DEL_QR_AQUI
+            
+            // Ejemplo de ID correcto: 1a2b3c4d5e6f7g8h9i0j
             
             downloadUrl: 'https://drive.google.com/uc?export=download&id=TU_ID_DE_ARCHIVO_AQUI',
-            logoId: '177IDkLltdQeXrJMTjWQGFWGsf3m9cC8u',  // ID del logo de Google Drive
-            qrImageId: '177IDkLltdQeXrJMTjWQGFWGsf3m9cC8u',  // ID del código QR de Google Drive
+            logoId: 'TU_ID_DEL_LOGO_AQUI',  // Reemplaza con el ID de tu logo (PNG o JPG)
+            qrImageId: 'TU_ID_DEL_QR_AQUI',  // Reemplaza con el ID de tu código QR (PNG o JPG)
             fileName: 'Informe_AMJB_Bomberos_Chiapas.pdf'
         };
         
@@ -526,18 +531,43 @@ https://drive.google.com/file/d/ 177IDkLltdQeXrJMTjWQGFWGsf3m9cC8u /view?usp=sha
             
             // Cargar imágenes desde Google Drive
             function loadImageFromDrive(elementId, driveFileId) {
-                if (driveFileId && 
-                    driveFileId !== 'TU_ID_DEL_LOGO_AQUI' && 
-                    driveFileId !== 'TU_ID_DEL_QR_AQUI' &&
-                    driveFileId !== 'TU_ID_DE_ARCHIVO_AQUI') {
-                    const imgElement = document.getElementById(elementId);
-                    if (imgElement) {
-                        // Construir URL de Google Drive para mostrar imagen
-                        imgElement.src = `https://drive.google.com/uc?export=view&id=${driveFileId}`;
+                // Verificar que el ID no sea el placeholder
+                if (!driveFileId || 
+                    driveFileId === 'TU_ID_DEL_LOGO_AQUI' || 
+                    driveFileId === 'TU_ID_DEL_QR_AQUI' ||
+                    driveFileId === 'TU_ID_DE_ARCHIVO_AQUI') {
+                    console.log('⚠️ Por favor configura el ID de ' + elementId + ' en el código');
+                    return;
+                }
+                
+                const imgElement = document.getElementById(elementId);
+                if (imgElement) {
+                    // Usar la URL correcta para visualizar imágenes de Google Drive
+                    // Esta URL funciona mejor para PNG y JPG
+                    const imageUrl = `https://lh3.googleusercontent.com/d/${driveFileId}`;
+                    
+                    console.log('🖼️ Intentando cargar imagen para ' + elementId + ' con ID: ' + driveFileId);
+                    
+                    imgElement.src = imageUrl;
+                    
+                    // Si falla con lh3, intentar con drive.google.com
+                    imgElement.onerror = function() {
+                        console.log('⚠️ Error con lh3, intentando método alternativo...');
+                        const alternativeUrl = `https://drive.google.com/uc?export=view&id=${driveFileId}`;
+                        imgElement.src = alternativeUrl;
+                        
                         imgElement.onerror = function() {
-                            console.error('Error al cargar la imagen con ID: ' + driveFileId);
+                            console.error('❌ Error al cargar la imagen con ID: ' + driveFileId);
+                            console.error('Verifica que:');
+                            console.error('1. El ID sea correcto');
+                            console.error('2. El archivo esté compartido como "Cualquiera con el enlace"');
+                            console.error('3. El archivo sea PNG o JPG');
                         };
-                    }
+                    };
+                    
+                    imgElement.onload = function() {
+                        console.log('✅ Imagen cargada correctamente: ' + elementId);
+                    };
                 }
             }
             
@@ -561,5 +591,3 @@ https://drive.google.com/file/d/ 177IDkLltdQeXrJMTjWQGFWGsf3m9cC8u /view?usp=sha
     </script>
 </body>
 </html>
-
-
