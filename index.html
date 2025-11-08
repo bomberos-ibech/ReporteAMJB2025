@@ -87,9 +87,24 @@
             font-weight: 300;
         }
         
+        /* Banner */
+        .banner {
+            margin-top: 110px;
+            width: 100%;
+            height: 200px; /* Reducido de 300px a 200px */
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        
         /* Hero con animaciones */
         .hero {
-            margin-top: 110px;
             min-height: 70vh;
             background: linear-gradient(135deg, #c62828 0%, #ff6f00 100%);
             position: relative;
@@ -149,6 +164,15 @@
             font-weight: 700;
             text-shadow: 2px 2px 20px rgba(0, 0, 0, 0.3);
             animation: fadeInUp 1s ease;
+        }
+        
+        .hero-logo {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            animation: fadeInUp 1s ease 0.4s backwards;
         }
         
         .hero p {
@@ -409,8 +433,17 @@
                 padding: 15px 20px;
             }
             
+            .banner {
+                height: 150px; /* Reducido de 200px a 150px en móviles */
+            }
+            
             .hero h2 {
                 font-size: 2.2rem;
+            }
+            
+            .hero-logo {
+                width: 150px;
+                height: 150px;
             }
             
             .hero p {
@@ -446,9 +479,15 @@
         </div>
     </header>
     
+    <!-- Banner -->
+    <div class="banner">
+        <img id="bannerImage" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='200' viewBox='0 0 1200 200'><rect width='1200' height='200' fill='%23c62828'/><text x='600' y='100' font-family='Arial' font-size='40' fill='white' text-anchor='middle'>Banner</text></svg>" alt="Banner">
+    </div>
+    
     <section class="hero">
         <div class="hero-content">
             <h2>Informe AMJB</h2>
+            <img id="amjbLogo" class="hero-logo" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'><rect width='200' height='200' fill='%23ffffff'/><text x='100' y='100' font-family='Arial' font-size='30' fill='%23c62828' text-anchor='middle' dominant-baseline='middle'>AMJB</text></svg>" alt="Logo AMJB">
             <p>Accede al documento oficial escaneando el código QR o descargándolo directamente</p>
         </div>
     </section>
@@ -512,6 +551,7 @@ La participación en estos eventos busca ampliar y profundizar la colaboración 
             // Copia solo la parte ABC123XYZ (el ID entre /d/ y /view)
             downloadUrl: 'https://drive.google.com/uc?export=download&id=1SFoYd4c8BlsHyI_-E7qLnttlNTpM5ZER',
             
+
             // ID DEL LOGO
             // CAMBIA ESTE ID por el ID de tu imagen de logo en Google Drive
             // El archivo debe estar compartido como "Cualquiera con el enlace puede VER"
@@ -522,6 +562,17 @@ La participación en estos eventos busca ampliar y profundizar la colaboración 
             // El archivo debe estar compartido como "Cualquiera con el enlace puede VER"
             // IMPORTANTE: Ya actualizado con tu ID: 1wtapZHeOFyT83qdonY_Noypc8nDvaE8j
             qrImageId: '1brWWdu1iqZd82yO9BAqH4L1D1-rzYd9R',
+
+            
+            // ID DE LA IMAGEN DE BANNER
+            // CAMBIA ESTE ID por el ID de tu imagen de banner en Google Drive
+            // El archivo debe estar compartido como "Cualquiera con el enlace puede VER"
+            bannerId: '1aC7Dz3vHmkC5gOUDhHC4Ithxdo9-vMCF',
+            
+            // ID DEL LOGO DE AMJB
+            // CAMBIA ESTE ID por el ID de tu imagen del logo AMJB en Google Drive
+            // El archivo debe estar compartido como "Cualquiera con el enlace puede VER"
+            amjbLogoId: '1Axuuhsk-AnZlMXQ6ZNY5y-8tHL-1tmoY',
             
             // Nombre del archivo para la descarga
             fileName: 'Informe_AMJB_Bomberos_Chiapas.pdf'
@@ -576,6 +627,8 @@ La participación en estos eventos busca ampliar y profundizar la colaboración 
             // Cargar las imágenes desde Google Drive
             loadImageFromDrive('logo', config.logoId);
             loadImageFromDrive('qrImage', config.qrImageId);
+            loadImageFromDrive('bannerImage', config.bannerId);
+            loadImageFromDrive('amjbLogo', config.amjbLogoId);
         });
         
         // Seguridad: Deshabilitar clic derecho y arrastre de imágenes
@@ -593,8 +646,3 @@ La participación en estos eventos busca ampliar y profundizar la colaboración 
     </script>
 </body>
 </html>
-
-
-
-
-
